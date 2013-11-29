@@ -1,0 +1,34 @@
+.instruments_panel {
+
+}
+
+.instruments_panel .item {
+	background: rgb(207, 207, 207);
+	display: inline-block;
+	text-align: center;
+	padding: 3px;
+	font-weight: bold;
+}
+
+.instruments_panel .item .object {
+	line-height: 50px;
+	font-size: 50px;
+	height: 50px;
+	cursor: pointer;
+}
+
+.instruments_panel .item .object .link {
+	position: relative;
+	top: 25px;
+	height: 2px;
+	width: 50px;
+	background: #000000;
+}
+
+.instruments_panel .item .object .link.input {
+	background: green;
+}
+
+.instruments_panel .item .object .link.output {
+	background: orangered;
+}

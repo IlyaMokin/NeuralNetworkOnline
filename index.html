@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html data-ng-app="ONLINENETWORK">
+<head>
+	<title></title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css"/>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css"/>
+	<link rel="stylesheet" href="css/site.css"/>
+	<link rel="stylesheet" href="css/networkConstructor.css"/>
+	<link rel="stylesheet" href="css/instrumentalPanel.css"/>
+
+</head>
+<body>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="#">title</a>
+		</div>
+	</div>
+</div>
+
+<div id="content" class="container" style="padding-top: 60px;">
+	<div class="content" data-ng-view>
+
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="lib/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/lib/jquery-ui-interactions.js"></script>
+<script type="text/javascript" src="lib/angular.js"></script>
+<script type="text/javascript" src="lib/angular-route.js"></script>
+<script type="text/javascript" src="lib/helpers.js"></script>
+<script type="text/javascript" src="lib/jslinq.js"></script>
+<script type="text/javascript" src="lib/namespace.js"></script>
+
+<script type="text/javascript" src="app/app.js"></script>
+<script type="text/javascript" src="app/networkConstructor/networkConstructor.js"></script>
+
+<script type="text/javascript" src="app/networkConstructor/directives/draggable.js"></script>
+<script type="text/javascript" src="app/networkConstructor/directives/droppable.js"></script>
+
+
+<script type="text/javascript" src="app/network/activationFunctions/Sigmoid.js"></script>
+<script type="text/javascript" src="app/network/Prototypes/LayerPrototype.js"></script>
+<script type="text/javascript" src="app/network/Prototypes/NetworkPrototype.js"></script>
+<script type="text/javascript" src="app/network/Prototypes/NeuronPrototype.js"></script>
+<script type="text/javascript" src="app/network/networkFactory.js"></script>
+
+</html>

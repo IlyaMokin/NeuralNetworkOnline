@@ -1,0 +1,49 @@
+<div class="instruments_panel bordered disableSelection">
+	<div class="item" >
+		<div class="object">
+			<div class="neuron" net-draggable="">&nbsp;</div>
+		</div>
+		<div class="name">
+			neuron
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="object">
+			<div class="link"></div>
+		</div>
+		<div class="name">
+			link
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="object">
+			<div class="link input"></div>
+		</div>
+		<div class="name">
+			input
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="object">
+			<div class="link output"></div>
+		</div>
+		<div class="name">
+			output
+		</div>
+	</div>
+
+	<div class="item">
+		<div class="object">
+			+
+		</div>
+		<div class="name">
+			add layer
+		</div>
+	</div>
+</div>
+
+<div class="network bordered disableSelection" ng-include="'/views/network/network.html'" ng-controller="networkConstructor">
+</div>

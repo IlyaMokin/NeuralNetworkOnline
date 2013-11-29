@@ -1,0 +1,48 @@
+.network {
+	border: 1px solid lavender;
+	position: relative;
+	min-height: 50px;
+}
+
+.network .layer {
+	text-align: center;
+	display: inline-block;
+	border: 1px solid lavender;
+	width: 50px;
+	padding: 5px;
+	min-height: 50px;
+	height: 50px;
+
+	display: table-cell;
+	vertical-align: middle;
+	margin: 5px;
+}
+
+.network .layer.js-hover{
+	border: 1px solid red;
+}
+
+.network .layer .neuron,
+.instruments_panel .neuron,
+.body .neuron {
+	z-index: 10;
+
+	line-height: 50px;
+	text-align: center;
+
+	width: 50px;
+	height: 50px;
+	background: gray;
+	-moz-border-radius: 25px;
+	-webkit-border-radius: 25px;
+	border-radius: 25px;
+}
+
+.network .layer .neuron{
+	float: left;
+	margin: 2px 0;
+}
+
+.instruments_panel .neuron{
+	cursor: hand;
+}
