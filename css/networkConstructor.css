@@ -1,25 +1,27 @@
 .network {
+	display: inline-block;
 	border: 1px solid lavender;
 	position: relative;
-	min-height: 50px;
+	min-height: 10px;
+	width: 755px;
 }
 
 .network .layer {
 	text-align: center;
-	display: inline-block;
-	border: 1px solid lavender;
-	width: 50px;
-	padding: 5px;
+	width: 60px;
+	padding: 20px;
 	min-height: 50px;
 	height: 50px;
+	border: 10px solid transparent;
+	border-top: 10px solid #4B4D61;
+	border-bottom: 10px solid #4B4D61;
 
 	display: table-cell;
 	vertical-align: middle;
-	margin: 5px;
 }
 
-.network .layer.js-hover{
-	border: 1px solid red;
+.network .layer.js-hover {
+	background: rgb(207, 252, 207);
 }
 
 .network .layer .neuron,
@@ -36,13 +38,42 @@
 	-moz-border-radius: 25px;
 	-webkit-border-radius: 25px;
 	border-radius: 25px;
+
+	border: 3px solid gray;
 }
 
-.network .layer .neuron{
-	float: left;
-	margin: 2px 0;
+.network .layerWrapper{
+	position: absolute;
 }
 
-.instruments_panel .neuron{
+.network .layer .neuron.input {
+	border: 3px solid green;
+}
+
+.network .layer .neuron.input input{
+	width: 40px;
+	border: 0;
+	text-align: center;
+}
+
+.network .layer .neuron.output {
+	border: 3px solid orangered;
+}
+
+.network .layer .neuron.selected{
+	background: antiquewhite;
+}
+
+.network .layer .neuron:hover:not(.selected) {
+	background: rgb(206, 206, 206);
+}
+
+.network .layer .neuron {
+
+	margin: 35px 0;
+	cursor: pointer;
+}
+
+.instruments_panel .neuron {
 	cursor: hand;
 }

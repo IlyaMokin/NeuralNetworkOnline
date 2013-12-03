@@ -2,19 +2,19 @@
 
 ONLINENETWORK.directive("netDroppable", function () {
 	return function (scope, $element, attrs) {
-		var clean = function(){
+		var clean = function () {
 			$element.removeClass('js-hover');
 		};
 
 		$element.droppable({
-			drop: function( event, ui ) {
-				ui.draggable.clone().appendTo($element);
+			drop: function () {
 				clean();
+				scope.$apply(attrs['netDroppable']);
 			},
-			over: function(event, ui){
+			over: function () {
 				$element.addClass('js-hover');
 			},
-			out: function(event, ui){
+			out: function () {
 				clean();
 			}
 		});

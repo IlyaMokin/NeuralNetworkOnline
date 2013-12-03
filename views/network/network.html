@@ -1,11 +1,14 @@
-<div class="layer bordered" net-droppable>
-</div>
+<div class="layerWrapper">
+	<div class="layer"
+		 net-droppable="addNeuron(layer)"
+		 ng-repeat="layer in network.layers">
 
-<div class="layer bordered" net-droppable>
+		<div class="neuron"
+			 net-node=" {layerID:neuron.layerID, neuronID:neuron.neuronID}"
+			 ng-repeat="neuron in layer.neurons"
+			 ng-class="{input: neuron.isInput, output: neuron.isOutput, selected: neuron.isSelected}"
+			 ng-click="checkState(neuron)">
+				<input ng-if="neuron.isInput" ng-model="neuron.result">
+			 </div>
+	</div>
 </div>
-
-<div class="layer bordered" net-droppable>
-</div>
-
-<div class="link"></div>
-<div class="link"></div>

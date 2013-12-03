@@ -1,0 +1,6 @@
+.info {
+	float: right;
+	display: inline-block;
+	width: 400px;
+	min-height: 300px;
+}

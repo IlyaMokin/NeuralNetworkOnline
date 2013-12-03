@@ -2,11 +2,12 @@
 
 namespace('NeuralNetwork.Prototypes').NetworkPrototype = function () {
 	var self = this,
-		layerPrototype = new NeuralNetwork.Prototypes.LayerPrototype(),
+		IDSync = 0,
 		Layer = function () {
 			this.neurons = [];
+			this.layerID = IDSync++;
 		};
-	Layer.prototype = layerPrototype;
+	Layer.prototype = new NeuralNetwork.Prototypes.LayerPrototype();
 
 	self.addLayer = function () {
 		this.layers.push(new Layer());
@@ -16,6 +17,13 @@ namespace('NeuralNetwork.Prototypes').NetworkPrototype = function () {
 		var values = {
 			W: Math.random()
 		};
+
+		if (neuron2.inputs.contains(function (link) {
+			return link.neuron.layerID === neuron1.layerID && link.neuron.neuronID === neuron1.neuronID
+		})) {
+			return;
+		}
+
 		neuron1.outputs.push({
 			neuron: neuron2,
 			values: values
@@ -35,11 +43,11 @@ namespace('NeuralNetwork.Prototypes').NetworkPrototype = function () {
 		this.out.push(neuron);
 	};
 
-	self.getResult = function(input){
+	self.getResult = function (input) {
 		var network = this,
 			networkInput = network.input;
 
-		input.each(function(item,ID){
+		input.each(function (item, ID) {
 			networkInput[ID] = item;
 		});
 
@@ -48,10 +56,10 @@ namespace('NeuralNetwork.Prototypes').NetworkPrototype = function () {
 		return this.out.select('result');
 	};
 
-	self.calculate = function(){
-		this.layers.each(function(layer){
-			layer.neurons.each(function(neuron){
-				neuron.S = neuron.inputs.sum(function(link){
+	self.calculate = function () {
+		this.layers.each(function (layer) {
+			layer.neurons.each(function (neuron) {
+				neuron.S = neuron.inputs.sum(function (link) {
 					return link.values.W * link.neuron.result;
 				}) - neuron.T;
 

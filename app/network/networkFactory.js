@@ -1,13 +1,12 @@
 'use strict';
 
 (function () {
-	var networkPrototype = new NeuralNetwork.Prototypes.NetworkPrototype(),
-		Network = function () {
+	var Network = function () {
 			this.layers = [];
 			this.input = [];
 			this.out = [];
 		};
-	Network.prototype = networkPrototype;
+	Network.prototype = new NeuralNetwork.Prototypes.NetworkPrototype();
 
 	namespace('NeuralNetwork').networkFactory = {
 		createNetwork: function () {
