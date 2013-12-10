@@ -1,0 +1,19 @@
+<span ng-if="info.neuron">
+	<span ng-include="'/views/network/additionalInfo/neuronInfo.html'"></span>
+</span>
+
+<span ng-if="info.layer">
+	<span ng-include="'/views/network/additionalInfo/layerInfo.html'"></span>
+</span>
+
+<div class="bordered">
+	<h3>Neural network</h3>
+	<b>Input:</b><br>
+	<div ng-repeat="input in network.input">
+		<input type="number" ng-model="input.result" step="0.000001" ng-click="checkNeuronState(input)">
+	</div>
+	<b>Result:</b><br>
+	<div ng-repeat="out in network.out">{{out.result}}</div>
+
+	<span class="btn" ng-click="calculate()">Calculate</span>
+</div>

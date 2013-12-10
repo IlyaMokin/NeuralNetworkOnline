@@ -20,8 +20,14 @@
 	vertical-align: middle;
 }
 
-.network .layer.js-hover {
-	background: rgb(207, 252, 207);
+.network .layer:hover,
+.network .layer.selected{
+	cursor: pointer;
+	border-top-color: #005580;
+	border-bottom-color: #005580;
+}
+.network .layer.js-hover{
+	background: rgb(231, 231, 231);
 }
 
 .network .layer .neuron,
@@ -64,16 +70,26 @@
 	background: antiquewhite;
 }
 
+.network .layer .neuron.selected.showedInfo{
+	background: darkkhaki;
+}
+
+
 .network .layer .neuron:hover:not(.selected) {
 	background: rgb(206, 206, 206);
 }
 
 .network .layer .neuron {
 
-	margin: 35px 0;
+	margin: 45px 0;
 	cursor: pointer;
 }
 
 .instruments_panel .neuron {
-	cursor: hand;
+	cursor: -webkit-grab;
+}
+
+.instruments_panel .neuron:active
+.neuron:active{
+	cursor: -webkit-grabbing;
 }

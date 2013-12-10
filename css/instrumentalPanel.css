@@ -24,18 +24,14 @@
 	min-width: 60px;
 }
 
-.instruments_panel .item .object .link {
-	position: relative;
-	top: 25px;
-	height: 2px;
-	width: 60px;
-	background: #000000;
+.instruments_panel .item .object.link {
+	color: black;
 }
 
-.instruments_panel .item .object .link.input {
-	background: green;
+.instruments_panel .item .object.input {
+	color: green;
 }
 
-.instruments_panel .item .object .link.output {
-	background: orangered;
+.instruments_panel .item .object.output {
+	color: orangered;
 }

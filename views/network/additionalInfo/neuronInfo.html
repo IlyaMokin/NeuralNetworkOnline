@@ -1,0 +1,53 @@
+<table class="bordered">
+	<tr>
+		<td class="key">T:</td>
+		<td class="value"><input type="number" ng-model="info.neuron.T" step="0.000001"></td>
+	</tr>
+	<tr ng-if="info.neuron.isInput">
+		<td class="key">InputValue:</td>
+		<td class="value"><input type="number" ng-model="info.neuron.result" step="0.000001"></td>
+	</tr>
+	<tr ng-if="info.neuron.isOutput">
+		<td class="key">ResultValue:</td>
+		<td class="value">{{info.neuron.result}}</td>
+	</tr>
+	<tr>
+		<td class="key">IsInput:</td>
+		<td class="value"><input type="checkbox" ng-model="info.neuron.isInput" ng-change="checkIsInput(info.neuron)"></td>
+	</tr>
+	<tr>
+		<td class="key">IsOutput:</td>
+		<td class="value"><input type="checkbox" ng-model="info.neuron.isOutput" ng-change="checkIsOutput(info.neuron)"></td>
+	</tr>
+	<tr ng-if="info.neuron.inputs.length">
+		<td class="key">InputWeights:</td>
+		<td class="value">
+			<div ng-click="showInputs = !showInputs" class="button disableSelection"
+				 ng-show="info.neuron.inputs.length>2">Show/Hide &#8595;&#8593;
+			</div>
+			<span ng-show="showInputs || info.neuron.inputs.length<=2">
+				<div ng-repeat="link in info.neuron.inputs" class="cells">
+					<input type="number"  step="0.000001" ng-model="link.values.W"/>
+					<input type="checkbox" ng-model="link.values.isShowed" title="show">
+					<span ng-click="removeLink(link)" class="button disableSelection">Del</span>
+				</div>
+
+			</span>
+		</td>
+	</tr>
+	<tr ng-if="info.neuron.outputs.length">
+		<td class="key">OutputWeights:</td>
+		<td class="value">
+			<div ng-click="showOutputs = !showOutputs" class="button disableSelection"
+				 ng-show="info.neuron.outputs.length>2">Show/Hide &#8595;&#8593;
+			</div>
+			<span ng-show="showOutputs || info.neuron.outputs.length<=2">
+				<div  ng-repeat="link in info.neuron.outputs" class="cells">
+					<input type="number"  step="0.000001" ng-model="link.values.W"/>
+					<input type="checkbox" ng-model="link.values.isShowed">
+					<span ng-click="removeLink(link)" class="button disableSelection">Del</span>
+				</div>
+			</span>
+		</td>
+	</tr>
+</table>

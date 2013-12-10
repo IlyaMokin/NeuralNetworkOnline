@@ -13,8 +13,8 @@
 			 ng-click="setState('setLink');"
 			 ng-class="{selected:constructorState==='setLink'}">
 
-			<div class="object">
-				<div class="link"></div>
+			<div class="object link">
+				&#8594;
 			</div>
 			<div class="name">
 				link
@@ -25,8 +25,8 @@
 			 ng-click="setState('addInputNeuron');"
 			 ng-class="{selected:constructorState==='addInputNeuron'}">
 
-			<div class="object">
-				<div class="link input"></div>
+			<div class="object input">
+				&#8594;
 			</div>
 			<div class="name">
 				input
@@ -37,22 +37,33 @@
 			 ng-click="setState('addOutputNeuron');"
 			 ng-class="{selected:constructorState==='addOutputNeuron'}">
 
-			<div class="object">
-				<div class="link output"></div>
+			<div class="object output">
+				&#8594;
 			</div>
 			<div class="name">
 				output
 			</div>
 		</div>
 
+		<div class="item"
+			 ng-click="setAutoConnections();">
+
+			<div class="object link">
+				&#8649;
+			</div>
+			<div class="name" title="auto connections">
+				auto
+			</div>
+		</div>
+
 		<div class="item" ng-click="addLayer()">
-		<div class="object">
-			+
+			<div class="object">
+				+
+			</div>
+			<div class="name">
+				add layer
+			</div>
 		</div>
-		<div class="name">
-			add layer
-		</div>
-	</div>
 
 		<div class="item" ng-click="init()">
 			<div class="object">
@@ -66,6 +77,6 @@
 
 	<div class="network bordered disableSelection" net-link-storage ng-include="'/views/network/network.html'">
 	</div>
-	<div class="bordered info">
+	<div class="bordered info" ng-include="'/views/network/additionalinfo.html'">
 	</div>
 </span>

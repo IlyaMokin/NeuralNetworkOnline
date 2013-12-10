@@ -3,7 +3,9 @@
 ONLINENETWORK.controller("networkConstructor", function ($scope) {
 	var context = {
 		selectedNeuron: {},
+
 		cleaners: [],
+		lastSelectedLayer: null,
 
 		setLink: function (neuron) {
 			var selected = context.selectedNeuron;
@@ -21,30 +23,41 @@ ONLINENETWORK.controller("networkConstructor", function ($scope) {
 			}
 		},
 
-		clearNeuron: function (neuron) {
-			if (neuron.clear) {
-				neuron.clear();
-			}
-		},
 		setInput: function (neuron) {
-			var clear = function () {
-				delete neuron.isInput;
-			};
-
-			neuron.isInput = true;
-			neuron.clear = clear;
-			context.cleaners.push(clear);
 			$scope.network.addInputNeuron(neuron);
 		},
 		setOutput: function (neuron) {
-			var clear = function () {
-				delete neuron.isOutput;
-			};
-
-			neuron.isOutput = true;
-			neuron.clear = clear;
-			context.cleaners.push(clear);
 			$scope.network.addOutputNeuron(neuron);
+		},
+		showNeuronInfo: function (neuron) {
+			context.clear();
+
+			neuron.inputs.each(function (link) {
+				link.values.isHighlighting = true;
+			});
+			neuron.outputs.each(function (link) {
+				link.values.isHighlighting = true;
+			});
+
+			$scope.info = {
+				neuron: neuron
+			};
+			neuron.isSelected = true;
+			neuron.showedInfo = true;
+			context.cleaners.push(function () {
+				neuron.isSelected = false;
+				neuron.showedInfo = false;
+				neuron.inputs.each(function (link) {
+					delete link.values.isHighlighting;
+				});
+				neuron.outputs.each(function (link) {
+					delete link.values.isHighlighting;
+				});
+			})
+		},
+		clearNeuron: function (neuron) {
+			delete neuron.isSelected;
+			delete neuron.showedInfo;
 		},
 		clear: function () {
 			context.cleaners.each(function (func) {
@@ -54,6 +67,10 @@ ONLINENETWORK.controller("networkConstructor", function ($scope) {
 			context.selectedNeuron = {};
 
 			delete $scope.constructorState;
+			if (context.lastSelectedLayer) {
+				delete context.lastSelectedLayer.isSelected;
+				context.lastSelectedLayer = null;
+			}
 		}
 	};
 
@@ -79,9 +96,12 @@ ONLINENETWORK.controller("networkConstructor", function ($scope) {
 		}
 	};
 
-	$scope.checkState = function (neuron) {
-		context.clearNeuron(neuron);
+	$scope.removeLink = function (link) {
+		$scope.network.removeLink(link);
+	};
 
+	$scope.checkNeuronState = function (neuron) {
+		context.clearNeuron(neuron);
 		switch ($scope.constructorState) {
 			case 'addInputNeuron':
 				context.setInput(neuron);
@@ -93,8 +113,55 @@ ONLINENETWORK.controller("networkConstructor", function ($scope) {
 				context.setLink(neuron);
 				break;
 			default:
-				context.clear();
+				context.showNeuronInfo(neuron);
 				break;
 		}
+	};
+
+	$scope.showLayerInfo = function (layer) {
+		!context.lastSelectedLayer || (delete context.lastSelectedLayer.isSelected);
+		context.lastSelectedLayer = layer;
+		layer.isSelected = true;
+		$scope.info = {
+			layer: layer
+		};
+	};
+
+	$scope.setAutoConnections = function () {
+		var network = $scope.network,
+			layers = network.layers;
+
+		layers.skip(1).each(function (layer, lID) {
+			layer.neurons.each(function (neuron2) {
+				layers[lID].neurons.each(function (neuron1) {
+					network.setConnect(neuron1, neuron2);
+
+					network.removeOutputNeuron(neuron1);
+					network.removeOutputNeuron(neuron2);
+				});
+			});
+		});
+
+		layers[0].neurons.each(function (neuron) {
+			network.addInputNeuron(neuron);
+		});
+
+		layers[layers.length - 1].neurons.each(function (neuron) {
+			network.addOutputNeuron(neuron);
+		});
+	};
+
+	$scope.checkIsInput = function (neuron) {
+		var network = $scope.network;
+		neuron.isInput ? network.addInputNeuron(neuron) : network.removeInputNeuron(neuron);
+	};
+
+	$scope.checkIsOutput = function(neuron){
+		var network = $scope.network;
+		neuron.isOutput ? network.addOutputNeuron(neuron) : network.removeOutputNeuron(neuron);
+	};
+
+	$scope.calculate = function(){
+		$scope.network.calculate();
 	};
 });
