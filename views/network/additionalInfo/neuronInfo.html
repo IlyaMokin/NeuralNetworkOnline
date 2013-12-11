@@ -1,5 +1,9 @@
 <table class="bordered">
 	<tr>
+		<td colspan="2"><h3>Selected neuron</h3></td>
+	</tr>
+
+	<tr ng-if="!info.neuron.isInput">
 		<td class="key">T:</td>
 		<td class="value"><input type="number" ng-model="info.neuron.T" step="0.000001"></td>
 	</tr>
@@ -11,14 +15,24 @@
 		<td class="key">ResultValue:</td>
 		<td class="value">{{info.neuron.result}}</td>
 	</tr>
-	<tr>
+	<tr ng-if="!info.neuron.isOutput">
 		<td class="key">IsInput:</td>
 		<td class="value"><input type="checkbox" ng-model="info.neuron.isInput" ng-change="checkIsInput(info.neuron)"></td>
 	</tr>
-	<tr>
+	<tr ng-if="!info.neuron.isInput">
 		<td class="key">IsOutput:</td>
 		<td class="value"><input type="checkbox" ng-model="info.neuron.isOutput" ng-change="checkIsOutput(info.neuron)"></td>
 	</tr>
+
+	<tr ng-if="!info.neuron.isInput">
+		<td class="key">Activation:</td>
+		<td class="value">
+			<select ng-model="info.neuron.activationName"
+					ng-options="func for func in activationFunctions"
+					ng-change="info.neuron.setActivationFunction(info.neuron.activationName)"></select>
+		</td>
+	</tr>
+
 	<tr ng-if="info.neuron.inputs.length">
 		<td class="key">InputWeights:</td>
 		<td class="value">
@@ -31,7 +45,6 @@
 					<input type="checkbox" ng-model="link.values.isShowed" title="show">
 					<span ng-click="removeLink(link)" class="button disableSelection">Del</span>
 				</div>
-
 			</span>
 		</td>
 	</tr>

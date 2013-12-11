@@ -1,6 +1,16 @@
 <table class="bordered">
 	<tr>
+		<td colspan="2"><h3>Selected layer</h3></td>
+	</tr>
+
+	<tr>
 		<td class="key">Neurons number</td>
-		<td class="value">{{info.layer.neurons.length}}</td>
+		<td class="value">
+			<input type="number"
+				   ng-model="info.layer.neurons.length"
+				   step="1"
+				   ng-change="setNeuronsByNumber(info.layer)"
+				   ng-disabled="!layerAllowedToChange(info.layer)">
+		</td>
 	</tr>
 </table>

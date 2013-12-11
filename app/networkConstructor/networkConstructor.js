@@ -76,7 +76,17 @@ ONLINENETWORK.controller("networkConstructor", function ($scope) {
 
 
 	$scope.init = function () {
+		var funcName;
+
+		$scope.info = {};
 		$scope.network = NeuralNetwork.networkFactory.createNetwork();
+
+		$scope.activationFunctions = [];
+		for(funcName in NeuralNetwork.ActivationFunctions){
+			if(NeuralNetwork.ActivationFunctions.hasOwnProperty(funcName)){
+				$scope.activationFunctions.push(funcName);
+			}
+		}
 	};
 	$scope.init();
 
@@ -137,12 +147,16 @@ ONLINENETWORK.controller("networkConstructor", function ($scope) {
 					network.setConnect(neuron1, neuron2);
 
 					network.removeOutputNeuron(neuron1);
+					network.removeInputNeuron(neuron1);
+
 					network.removeOutputNeuron(neuron2);
+					network.removeInputNeuron(neuron2);
 				});
 			});
 		});
 
 		layers[0].neurons.each(function (neuron) {
+			network.removeInputNeuron(neuron);
 			network.addInputNeuron(neuron);
 		});
 
@@ -156,12 +170,31 @@ ONLINENETWORK.controller("networkConstructor", function ($scope) {
 		neuron.isInput ? network.addInputNeuron(neuron) : network.removeInputNeuron(neuron);
 	};
 
-	$scope.checkIsOutput = function(neuron){
+	$scope.checkIsOutput = function (neuron) {
 		var network = $scope.network;
 		neuron.isOutput ? network.addOutputNeuron(neuron) : network.removeOutputNeuron(neuron);
 	};
 
-	$scope.calculate = function(){
+	$scope.calculate = function () {
 		$scope.network.calculate();
+	};
+
+	$scope.setNeuronsByNumber = function (layer, oldNumber) {
+		var notEmptyNeurons = layer.neurons.where(function (neuron) {
+				return neuron;
+			}),
+			len = layer.neurons.length - notEmptyNeurons.length, ID;
+
+		layer.neurons = notEmptyNeurons;
+		if(len)
+		for (ID = 0; ID < len; ID += 1) {
+			layer.addNeuron();
+		}
+	};
+
+	$scope.layerAllowedToChange = function(layer){
+		return !layer.neurons.contains(function(neuron){
+			return neuron.isInput || neuron.isOutput || neuron.outputs.length || neuron.inputs.length;
+		});
 	};
 });

@@ -88,7 +88,9 @@ namespace('NeuralNetwork.Prototypes').NetworkPrototype = function () {
 
 	self.calculate = function () {
 		this.layers.each(function (layer) {
-			layer.neurons.each(function (neuron) {
+			layer.neurons.where(function(neuron){
+				return !neuron.isInput;
+			}).each(function (neuron) {
 				neuron.S = neuron.inputs.sum(function (link) {
 					return link.values.W * link.neuron.result;
 				}) - neuron.T;

@@ -11,6 +11,8 @@ namespace('NeuralNetwork.Prototypes').LayerPrototype = function () {
 			this.neuronID = IDSync++;
 			this.layerID = layerID;
 			this.result = 0;
+			this.activationName = "Sigmoid";
+			this.setActivationFunction(this.activationName);
 		};
 	Neuron.prototype = neuronPrototype;
 

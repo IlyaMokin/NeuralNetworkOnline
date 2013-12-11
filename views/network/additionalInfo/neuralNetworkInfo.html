@@ -1,0 +1,35 @@
+<table class="bordered">
+	<tr>
+		<td colspan="2"><h3>Neural network</h3></td>
+	</tr>
+
+	<tr>
+		<td  class="key">
+			Input:
+		</td>
+		<td class="value">
+			<div ng-click="showInputs = !showInputs" class="button disableSelection"
+				 ng-show="network.input.length>2">Show/Hide &#8595;&#8593;
+			</div>
+			<div ng-show="showInputs || network.input.length<=2" ng-repeat="input in network.input" class="cells">
+				<input type="number" ng-model="input.result" step="0.000001" ng-click="checkNeuronState(input)" />
+			</div>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="key">Result:</td>
+		<td class="value">
+			<div ng-click="showOutputs = !showOutputs" class="button disableSelection"
+				 ng-show="network.out.length>2">Show/Hide &#8595;&#8593;
+			</div>
+			<div ng-show="showOutputs || network.out.length<=2" ng-repeat="out in network.out" class="cells">
+				<input  type="number" readonly ng-model="out.result"/>
+			</div>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2"><span class="btn" ng-click="calculate()">Calculate</span></td>
+	</tr>
+</table>
